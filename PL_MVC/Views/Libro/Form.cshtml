@@ -1,0 +1,111 @@
+﻿@model ML.Libro
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Agregar o Actualizar Libro</h2>
+    <div class="row">
+        <div class="col-md-12">
+
+            @using (Html.BeginForm("Form", "Libro", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-horizontal">
+
+
+                    <div class="form-group">
+
+                        <div class="col-md-3">
+
+                            @Html.LabelFor(model => model.IdLibro, new { @class = "hidden" })
+
+                            @Html.TextBoxFor(model => model.IdLibro, new { @class = "hidden form-control" })
+
+                            @Html.ValidationMessageFor(model => model.IdLibro)
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Nombre)
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="bi bi-building-fill-check"></i></span>
+                                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                                @Html.ValidationMessageFor(model => model.Nombre)
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.NumeroPaginas)
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="bi bi-building-fill-check"></i></span>
+                                @Html.TextBoxFor(model => model.NumeroPaginas, new { @class = "form-control", @id = "txtNumeroPaginas" })
+                                @Html.ValidationMessageFor(model => model.NumeroPaginas)
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Edicion)
+                            @Html.TextBoxFor(model => model.Edicion, new { @class = "form-control", @id = "txtEdicion" })
+                            @Html.ValidationMessageFor(model => model.Edicion)
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Autor.IdAutor)
+                            @Html.DropDownListFor(model => model.Autor.IdAutor, new SelectList(Model.Autor.Autores, "IdAutor", "NombreAutor"), "Selecciona una opción", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Autor.IdAutor)
+                        </div>
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Editorial.IdEditorial)
+                            @Html.DropDownListFor(model => model.Editorial.IdEditorial, new SelectList(Model.Editorial.Editoriales, "IdEditorial", "NombreEditorial"), "Selecciona una opción", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Editorial.IdEditorial)
+                        </div>
+
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Genero.IdGenero)
+                            @Html.DropDownListFor(model => model.Genero.IdGenero, new SelectList(Model.Genero.Generos, "IdGenero", "NombreGenero"), "Selecciona una opción", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Genero.IdGenero)
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.FechaDePublicacion)
+                                @Html.TextBoxFor(model => model.FechaDePublicacion, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FechaDePublicacion)
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <div class="col-md-3">
+
+
+
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+
+                            @Html.ActionLink("Regresar", "GetAll", "Libro", htmlAttributes: new { @class = "btn btn-danger" })
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+
+
+        </div>
+    </div>
+</div>
